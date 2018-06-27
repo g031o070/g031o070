@@ -33,9 +33,9 @@ try{
     $db = null;  //データベースの切断
   }
 
-  } catch (PDOException $e) {
-    exit('データベース接続失敗。'.$e->getMessage());  //データベースに繋がらない場合のエラーメッセージ
-  }
+} catch (PDOException $e) {
+  exit('データベース接続失敗。'.$e->getMessage());  //データベースに繋がらない場合のエラーメッセージ
+}
 
 ?>
 
