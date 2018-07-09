@@ -1,8 +1,8 @@
 <?php
-$host = "localhost";
-$username = "test";
-$password = "test";
-$dbname = "register_func";
+$host = "153.126.145.118";
+$username = "g031o070";
+$password = "g031o070";
+$dbname = "g031o070";
 
 $mysqli = new mysqli($host, $username, $password, $dbname);
 if ($mysqli->connect_error) {
@@ -14,7 +14,7 @@ if ($mysqli->connect_error) {
 <?php
 session_start();
 if(!isset($_SESSION['user'])) {
-	header("Location: index.php");
+	header("Location: login.php");
 }
 
 $query = "SELECT * FROM users WHERE user_id=".$_SESSION['user']."";
@@ -40,29 +40,21 @@ if(isset($_POST['register'])) {
 } ?>
 
 <!DOCTYPE HTML>
-<html lang="ja">
+<html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>日本一周体験システム</title>
-<link rel="stylesheet" href="style.css">
-</head>
+	<meta charset="utf-8" />
+	<title>日本一周体験システム</title>
 </head>
 <body>
-<div class="col-xs-6 col-xs-offset-3">
-
-<form method="post">
-<h1>ホーム画面</h1>
-<ul>
-	<li>番号：<?php echo $id; ?></li>
-	<li>ユーザー名：<?php echo $username; ?></li>
-</ul>
-<div class="form-group">
-	<button type="submit" class="btn btn-default" name="register">トレーニング登録</button>
-</div>
-<a href="logout.php?logout">ログアウト</a>
-</form>
-
-</div>
+	<form method="post">
+		<h1>ホーム画面</h1>
+		<ul>
+			<li>ユーザー名：<?php echo $username; ?></li>
+		</ul>
+		<div class="form-group">
+			<button type="submit" class="btn btn-default" name="register">トレーニング登録</button>
+		</div>
+		<a href="logout.php?logout">ログアウト</a>
+	</form>
 </body>
 </html>
