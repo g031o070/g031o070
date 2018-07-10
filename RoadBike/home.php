@@ -36,7 +36,7 @@ $result->close();
 
 <?php
 if(isset($_POST['register'])) {
-	header("Location: training.php");
+	header("Location: training_register.php");
 } ?>
 
 <!DOCTYPE HTML>
