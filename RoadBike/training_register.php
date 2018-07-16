@@ -4,21 +4,22 @@ $username = "g031o070";
 $password = "g031o070";
 $dbname = "g031o070";
 
-$mysqli = new mysqli($host, $username, $password, $dbname);
-if ($mysqli->connect_error) {
-	error_log($mysqli->connect_error);
-	exit;
+$mysqli = new mysqli($host, $username, $password, $dbname);  //データベース接続
+$mysqli->set_charset('utf8');  //文字コード指定
+if ($mysqli->connect_error) {  //接続エラーのとき
+	error_log($mysqli->connect_error);  //エラーメッセージ
+	exit;  //終了
 }
 ?>
 
 <?php
-session_start();
-if(!isset($_SESSION['user'])) {
+session_start();  //セッション開始
+if(!isset($_SESSION['user'])) {  //未ログインならばログイン画面へリダイレクト
 	header("Location: login.php");
 }
 
+//クエリの実行
 $query = "SELECT * FROM users WHERE user_id=".$_SESSION['user']."";
-$result = $mysqli->query($query);
 $result = $mysqli->query($query);
 if (!$result) {
 	print('クエリーが失敗しました。' . $mysqli->error);
@@ -26,22 +27,23 @@ if (!$result) {
 	exit();
 }
 
+//ユーザーidとユーザー名を取り出す
 while ($row = $result->fetch_assoc()) {
 	$id = $row['user_id'];
 	$username = $row['username'];
 }
 
-$result->close();
+$result->close();  //データベースの切断
 ?>
 
 <?php
 $page_flag = 0; //入力画面
 
-if (!empty($_POST['confirm'])) {
+if (isset($_POST['confirm'])) {  //cofirmがPOSTされたとき
 	$page_flag = 1; //確認画面
 
-} elseif (!empty($_POST['submit'])) {
-	$date = $mysqli->real_escape_string($_POST['date']);
+} elseif (isset($_POST['submit'])) {  //submitがPOSTされたとき
+	$date = $mysqli->real_escape_string($_POST['date']);  //データの受け取り、real_escape_string(SQLインジェクション対策)
   $speed = $mysqli->real_escape_string($_POST['speed']);
   $cadence = $mysqli->real_escape_string($_POST['cadence']);
   $distance = $mysqli->real_escape_string($_POST['distance']);
@@ -49,6 +51,7 @@ if (!empty($_POST['confirm'])) {
   $time = $mysqli->real_escape_string($_POST['time']);
   $gear = $mysqli->real_escape_string($_POST['gear']);
 
+//POSTされたデータをデータベースへ
   $query = "INSERT INTO training(user_id,date,speed,cadence,distance,heartrate,time,gear) VALUES('$id','$date','$speed','$cadence','$distance','$heartrate','$time','$gear')";
 	if($mysqli->query($query)) {
 		$page_flag = 2;  //完了画面
@@ -134,25 +137,25 @@ if (!empty($_POST['confirm'])) {
 	<?php else : ?>  <!--登録画面-->
 		<form method="post">
 			<div class="form-group">
-				<input class="form-control" type="date" name="date" placeholder="日付" value="<?php if(!empty($_POST['date'])){echo $_POST['date'];} ?>">
+				<input class="form-control" type="date" name="date" placeholder="日付" required value="<?php if(isset($_POST['date'])){echo $_POST['date'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="speed" placeholder="平均速度" value="<?php if(!empty($_POST['speed'])){echo $_POST['speed'];} ?>">
+				<input class="form-control" type="text" name="speed" placeholder="平均速度" required value="<?php if(isset($_POST['speed'])){echo $_POST['speed'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="cadence" placeholder="平均ケイデンス" value="<?php if(!empty($_POST['cadence'])){echo $_POST['cadence'];} ?>">
+				<input class="form-control" type="text" name="cadence" placeholder="平均ケイデンス" required value="<?php if(isset($_POST['cadence'])){echo $_POST['cadence'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="distance" placeholder="走行距離" value="<?php if(!empty($_POST['speed'])){echo $_POST['distance'];} ?>">
+				<input class="form-control" type="text" name="distance" placeholder="走行距離" required value="<?php if(isset($_POST['speed'])){echo $_POST['distance'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="heartrate" placeholder="心拍数" value="<?php if(!empty($_POST['heartrate'])){echo $_POST['heartrate'];} ?>">
+				<input class="form-control" type="text" name="heartrate" placeholder="心拍数" required value="<?php if(isset($_POST['heartrate'])){echo $_POST['heartrate'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="time" name="time" placeholder="練習時間" value="<?php if(!empty($_POST['time'])){echo $_POST['time'];} ?>">
+				<input class="form-control" type="time" name="time" placeholder="練習時間" required value="<?php if(isset($_POST['time'])){echo $_POST['time'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="gear" placeholder="ギア" value="<?php if(!empty($_POST['gear'])){echo $_POST['gear'];} ?>">
+				<input class="form-control" type="text" name="gear" placeholder="ギア" required value="<?php if(isset($_POST['gear'])){echo $_POST['gear'];} ?>">
 			</div>
 			<button class="btn btn-default" type="submit" name="confirm" value='cofirm'>確認</button>
 		</form>

@@ -1,6 +1,6 @@
 <?php
-if(isset($_POST['login'])) {
-  header("Location: login.php");
+if(isset($_POST['login'])) {  //loginがPOSTされたとき
+  header("Location: login.php");  //ログイン画面
 }
 ?>
 
