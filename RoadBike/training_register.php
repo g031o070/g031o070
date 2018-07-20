@@ -83,25 +83,25 @@ if (isset($_POST['confirm'])) {  //cofirmがPOSTされたとき
 			<div class="form-group">
 				<label class="col-sm-3 control-label">平均速度：</label>
 				<?php if (isset($_POST['speed'])) {
-					echo $_POST['speed'];
+					echo $_POST['speed']."km";
 				} ?>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">平均ケイデンス：</label>
 				<?php if (isset($_POST['cadence'])) {
-					echo $_POST['cadence'];
+					echo $_POST['cadence']."rpm";
 				} ?>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">走行距離：</label>
 				<?php if (isset($_POST['distance'])) {
-					echo $_POST['distance'];
+					echo $_POST['distance']."km";
 				} ?>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">心拍数：</label>
 				<?php if (isset($_POST['heartrate'])) {
-					echo $_POST['heartrate'];
+					echo $_POST['heartrate']."bpm";
 				} ?>
 			</div>
 			<div class="form-group">
@@ -113,7 +113,7 @@ if (isset($_POST['confirm'])) {  //cofirmがPOSTされたとき
 			<div class="form-group">
 				<label class="col-sm-3 control-label">ギア：</label>
 				<?php if (isset($_POST['gear'])) {
-					echo $_POST['gear'];
+					echo $_POST['gear']."段";
 				} ?>
 			</div>
 			<p>この内容で登録してもよろしいでしょうか</p>
@@ -140,22 +140,22 @@ if (isset($_POST['confirm'])) {  //cofirmがPOSTされたとき
 				<input class="form-control" type="date" name="date" placeholder="日付" required value="<?php if(isset($_POST['date'])){echo $_POST['date'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="speed" placeholder="平均速度" required value="<?php if(isset($_POST['speed'])){echo $_POST['speed'];} ?>">
+				<input class="form-control" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$" title="数字でご入力ください" name="speed" placeholder="平均速度(km/h)" required value="<?php if(isset($_POST['speed'])){echo $_POST['speed'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="cadence" placeholder="平均ケイデンス" required value="<?php if(isset($_POST['cadence'])){echo $_POST['cadence'];} ?>">
+				<input class="form-control" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$" title="数字でご入力ください" name="cadence" placeholder="平均ケイデンス(rpm)" required value="<?php if(isset($_POST['cadence'])){echo $_POST['cadence'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="distance" placeholder="走行距離" required value="<?php if(isset($_POST['speed'])){echo $_POST['distance'];} ?>">
+				<input class="form-control" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$" title="数字でご入力ください" name="distance" placeholder="走行距離(km)" required value="<?php if(isset($_POST['speed'])){echo $_POST['distance'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="heartrate" placeholder="心拍数" required value="<?php if(isset($_POST['heartrate'])){echo $_POST['heartrate'];} ?>">
+				<input class="form-control" type="text" pattern="^[0-9]+$" title="数字でご入力ください" name="heartrate" placeholder="心拍数(bpm)" required value="<?php if(isset($_POST['heartrate'])){echo $_POST['heartrate'];} ?>">
 			</div>
 			<div class="form-group">
 				<input class="form-control" type="time" name="time" placeholder="練習時間" required value="<?php if(isset($_POST['time'])){echo $_POST['time'];} ?>">
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="gear" placeholder="ギア" required value="<?php if(isset($_POST['gear'])){echo $_POST['gear'];} ?>">
+				<input class="form-control" type="text" pattern="^[0-9]+$" title="数字でご入力ください" name="gear" placeholder="ギア(段)" required value="<?php if(isset($_POST['gear'])){echo $_POST['gear'];} ?>">
 			</div>
 			<button class="btn btn-default" type="submit" name="confirm" value='cofirm'>確認</button>
 		</form>

@@ -75,7 +75,7 @@ if(isset($_POST['signup'])) {  //signupがPOSTされたとき
 			<button type="submit" class="btn btn-default" name="login">ログイン</button>
 		</div>
 		<div class="form-group">
-			<button type="submit" class="btn btn-default" name="signup">新規登録</button>
+			<button type="submit" class="btn btn-default" name="signup" formnovalidate>新規登録</button>
 		</div>
 	</form>
 </div>
